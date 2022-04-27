@@ -2,16 +2,35 @@
 #include <stdio.h>
 #include <string>
 #include <fstream>
+#include <vector>
+
+#ifndef FILEMANAGER_H
+#define FILEMANAGER_H
 
 using namespace std;
 
 class FileManager
 {
 	private:
-		//string directorytype;
-		//string fileName; // not necessary unless we use the FileManager class to get and set the fileName?
-		//char mode;
+		
+		string filePath;
+		vector<string> fileContent; // temporary place to hold content
+
+		
 	public:
-		fstream readfile(string fileName);
+		fstream currentFile;
+
+		FileManager(string s); // constructor
+
+		string getFilePath();
+		void setFilePath(string s);
+
+		void readFile();
+		//void writeFile();
+		//bool fileExists();
+		void addToFileContent(string s);
+		int getFileSize();
+		
 };
 
+#endif
