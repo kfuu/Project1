@@ -8,10 +8,10 @@ using namespace std;
 class FileManager
 {
 	private:
-		string directorytype;
-		string fileName;
-		char mode;
+		//string directorytype;
+		//string fileName; // not necessary unless we use the FileManager class to get and set the fileName?
+		//char mode;
 	public:
-		ifstream readfile(string fileName, char _mode);
+		fstream readfile(string fileName);
 };
 

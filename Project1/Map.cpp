@@ -73,3 +73,21 @@ void Map::setBufferSize(int _buffersize)
 {
 	buffersize = _buffersize;
 }
+
+
+// Below sample code to use in some main function for invoking file manager object.
+// For the actual process of going through the file and reading 
+// in individual lines, I did not feel that it should be in the
+// FileManager class, since it should only be "managing files".
+// So, either we create a separate class for parsing, or maybe we implement
+// it in the Workflow class?
+
+//FileManager fm;
+//fstream file = fm.readFile("test.txt");
+//
+//string input;
+//while (file >> input) {
+//	cout << input << endl;
+//}
+
+// Or use getline()
