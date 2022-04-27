@@ -29,6 +29,7 @@ class FileManager
 		//void writeFile();
 		//bool fileExists();
 		void addToFileContent(string s);
+		string readFileContentLine(size_t l);
 		int getFileSize();
 		
 };
