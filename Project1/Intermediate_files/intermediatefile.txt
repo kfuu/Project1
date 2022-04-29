@@ -1,0 +1,7 @@
+(cricket,1)
+(is,1)
+(a,1)
+(popular,1)
+(ssport,1)
+(in,1)
+(australia,1)

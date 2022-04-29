@@ -1,37 +1,52 @@
+// Author: Jeff Ngeama
+// Course: CIS 687
+//Syracuse University
+//Project 1
+//Start Date: 04/22/22
+//Last Updated Date: 04/28/22
+
+#ifndef FILEMANAGER_H
+#define FILEMANAGER_H
 #include <iostream>
 #include <stdio.h>
 #include <string>
 #include <fstream>
-#include <vector>
 
-#ifndef FILEMANAGER_H
-#define FILEMANAGER_H
 
 using namespace std;
 
 class FileManager
 {
 	private:
-		
-		string filePath;
-		vector<string> fileContent; // temporary place to hold content
+		string directoryname;
+		string fileName;
+		char mode;
+		//ifstream ifilehandler;
+		//ofstream ofilehandler;
 
-		
 	public:
-		fstream currentFile;
+		FileManager(string _directorytype, string _filename, char _mode);
+		string readline(ifstream* ifilehandler);
+		string closeinfile(ifstream*);
+		string closeoutfile(ofstream*);
+		string writetoFile(ofstream*,string);
+		string appendtofile(ofstream*,string);
+		//getters
+		string getDirectoryName();
+		string getFileName();
+		char   getMode();
+		// Setters
+		void setDirectoryName(string);
+		void setFileName(string);
+		void setMode(char);
+		ifstream openfileforreading();
+		ofstream openfileforwriting();
+		ofstream openfileforappending();
 
-		FileManager(string s); // constructor
 
-		string getFilePath();
-		void setFilePath(string s);
 
-		void readFile();
-		//void writeFile();
-		//bool fileExists();
-		void addToFileContent(string s);
-		string readFileContentLine(size_t l);
-		int getFileSize();
-		
 };
 
 #endif
+
+
