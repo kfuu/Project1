@@ -18,7 +18,7 @@ class Map
 			buffersize = 250;
 		}
 		void map(string key, string value);
-		void export(string key, string value);
+		//void export(string key, string value);
 		string getBuffer();
 		int getBufferSize();
 		void setBuffer(string);

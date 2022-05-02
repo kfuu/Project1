@@ -41,7 +41,7 @@ void Map::map(string key, string value)
 			if (word.length() > 0)
 			{
 				wordArray[j] = word;
-				export(key, word);
+				//export(key, word);
 				word = "";
 				j = j + 1;		
 			}
@@ -50,11 +50,10 @@ void Map::map(string key, string value)
 	numWords = j;
 }
 
-void Map::export(string key, string value)
-{
-	buffer = buffer + ":" + value;
-	// To be continued
-}
+//void Map::export(string key, string value) {
+//	// buffer = buffer + ":" + value;
+//	// To be continued
+//}
 
 string Map::getBuffer()
 {
