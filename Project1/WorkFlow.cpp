@@ -4,7 +4,7 @@
 void WorkFlow::run(string a1, string a2, string a3, string a4) { // a1 = argv0, a2 = argv1, etc.
 	// File paths and file name set up & initialization
 	string totalDirectory = a1;
-	string currentDirectory = string(totalDirectory.begin(), totalDirectory.end() - 20) + "Project1";
+	string currentDirectory = "";
 
 	string inputDirectory = currentDirectory + a2;
 	string outputDirectory = currentDirectory + a3;
