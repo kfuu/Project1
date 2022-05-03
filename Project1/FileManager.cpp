@@ -4,7 +4,9 @@
 //Project 1
 //Start Date: 04/22/22
 //Last Updated Date: 04/28/22
+
 #include "FileManager.h"
+
 // constructor ,initialize the directory name and file name
 FileManager::FileManager(string _directoryname, string _filename, char _mode)
 {
@@ -13,118 +15,111 @@ FileManager::FileManager(string _directoryname, string _filename, char _mode)
 	mode = _mode;
 }
 // open the file for reading
-ifstream FileManager::openfileforreading()
+void FileManager::openfileforreading()
 {
 	if (mode == 'r')
 	{
-		ifstream filehandler;
-		filehandler.open(directoryname + fileName);
-		if (filehandler.is_open())
-		{
-			return filehandler;
-		}
-		
+		currentFile.open(directoryname + '/' + fileName, std::fstream::in);
 	}
 	
 }
 //open the file for wrting
-ofstream FileManager::openfileforwriting()
+void FileManager::openfileforwriting()
 {
 
 	if (mode == 'w')
 	{
-		ofstream ofilehandler;
-		ofilehandler.open(directoryname + fileName);
-		if (ofilehandler.is_open())
-		{
-			return ofilehandler;
-		}
-
+		currentFile.open(directoryname + '/' + fileName, std::fstream::out);
 	}
 }
 //open file for appending
-ofstream FileManager::openfileforappending()
+void FileManager::openfileforappending()
 {
 	if (mode == 'a')
 	{
-		ofstream ofilehandler;
+		currentFile.open(directoryname + '/' +  fileName, std::fstream::app);
+	}
+}
 
-		ofilehandler.open(directoryname + fileName, std::ios::app | std::ios_base::out);
-		if (ofilehandler.is_open())
-		{
 
-			return ofilehandler;
+//read a line from a file
+void FileManager::readFile()
+{
+	if (currentFile.is_open()) {
+		string input;
+		for (int i = 0; getline(currentFile, input); i++) {
+			fileContent.push_back(input);
 		}
 	}
+
+	closeinfile();
 }
-//read a line from a file
-string FileManager::readline(ifstream* ifilehandler)
-{
-	string outline = "";
-	if (ifilehandler->good())
-	{
-		*ifilehandler >> outline;
-		return "success";
+string FileManager::readFileContentLine(size_t l) {
+	/*
+	This function can be called in main() once the file has been read with
+	readFile(). This function returns the contents of the file
+	at line l.
+	*/
+
+	if (l > fileContent.size()) {
+		throw invalid_argument("Line number out of bounds.");
 	}
-	else
-	{
-		return "there was an error";
-	}
+	return fileContent[l];
 }
+
+
 // close the outfile
-string FileManager::closeoutfile(ofstream* ofilehandler)
+string FileManager::closeoutfile()
 {
-	if (ofilehandler->good())
-	{
-		ofilehandler->close();
-		return "success";
+	if (currentFile.is_open()) {
+		currentFile.close();
 	}
-	else
-	{
-		return " there was an error";
-	}
+	else { return "Error"; }
+	return "Success";
 }
+
 //close the infile
-string FileManager::closeinfile(ifstream* ifilehandler)
+string FileManager::closeinfile()
 {
-	if (ifilehandler->good())
-	{
-		ifilehandler->close();
-		return "success";
+	if (currentFile.is_open()) {
+		currentFile.close();
 	}
-	else
-	{
-		return " there was an error";
-	}
+	else { return "Error"; }
+	return "Success";
 }
+
+
 //write line  to the  file
-string FileManager::writetoFile(ofstream* ofilehandler,string dataline)
+string FileManager::writetoFile(string dataline)
 {
-	if (ofilehandler->good())
-	{
-		cout << " from exportrest " << dataline << endl;
-		*ofilehandler << dataline + "\n";
-		return "success";
+	if (currentFile.is_open()) {
+		currentFile << dataline + "\n";
+		currentFile.flush();
+		closeoutfile();
+		return "Success";
 	}
-	else
-	{
-		return " there was an error";
+	else {
+		return "Error";
 	}
+	
+
 }
 // append a line to the file
-string FileManager::appendtofile(ofstream* ofilehandler,string dataline)
+string FileManager::appendtofile(string dataline)
 {
-	if (ofilehandler->good())
-	{
-		*ofilehandler << dataline;
-		return "success";
+	if (currentFile.is_open()) {
+		currentFile << dataline;
+		currentFile.flush();
+		closeoutfile();
+		return "Success";
 	}
-	else
-	{
-		return " there was an error";
+	else {
+		return "Error";
 	}
 
 }
+
+
 // get the file directory name
 string FileManager::getDirectoryName()
 {

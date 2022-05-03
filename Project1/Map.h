@@ -27,7 +27,9 @@ class Map
 		int buffersize;
 		string infiledirectory, outfiledirectory, intermediatefiledirectory;
 		string infilename, outfilename, intermediatefilename;
+
 	public:
+
 		// constructor
 		Map(string _infiledirectory, string _outfiledirectory, string _intermediatefiledirectory,
 			string _infilename,string _outfilename,string _intermediatefilename)

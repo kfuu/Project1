@@ -15,7 +15,7 @@
 void Map::map(string key, string value)
 {
 	//Define all the punctution that are to be removed.
-	string punction = "!,.;:'$@*&^()%#~?/";
+	string punction = "!,.;:'$@*&^()%#~?/[]-";
 	//This for loop will go through all the punctuations and remove them
 	for (int i = 0; i < punction.length(); i++)
 	{
@@ -89,33 +89,28 @@ void Map::map(string key, string value)
 	// set the number of words to numwords.
 	numWords = j;
 	msg = exporttherest();
-	cout << "this is out " << msg << endl;
 }
 //This export function buffers the output in memory and periodically writes the data to the disk.
 //input: key - name of the intermediate file
 //       value - a word
 // output: none
 string Map::map_export(string key, string value)
-{
-	//delete the contents of the intermediate file first
-	 FileManager file(intermediatefiledirectory, intermediatefilename,'w');
-	 ofstream ofilehandler = file.openfileforwriting();
-	 file.closeoutfile(&ofilehandler);
+{	
+	FileManager file(intermediatefiledirectory, key, 'a');
+	file.openfileforappending();
+
 	//add the value to the buffer
 	string line =   "(" + value + ",1)\n";
 	string msg = "";
 	buffer = buffer + line;
+	
 	//if the length of the buffer is greater than buffer size,add buffer to the intermediate file
-	if (buffer.length() > buffersize)
+	if (buffer.length() < buffersize)
 	{
-		FileManager file(intermediatefiledirectory, intermediatefilename,'a');
-		ofstream ofilehandler = file.openfileforappending();
-		// write buffer to the intermediate file
-		// Empty buffer
-		msg = file.appendtofile(&ofilehandler,buffer);
+		msg = file.appendtofile(buffer);
 		buffer = "";
-		file.closeoutfile(&ofilehandler);	
 	}
+
 	return msg;
 }
 // get the Buffer value
@@ -141,16 +136,11 @@ void Map::setBufferSize(int _buffersize)
 string Map::exporttherest()
 {
 	FileManager file(intermediatefiledirectory, intermediatefilename, 'a');
-	ofstream ofilehandler = file.openfileforappending();
+	file.openfileforappending(); /// ofstream ofilehandler = 
 	string msg = "";
-	if (ofilehandler.good())
-	{
-		// write buffer to the intermediate file
-		// Empty buffer
-		msg = file.appendtofile(&ofilehandler, buffer);
-		buffer = "";
-		file.closeoutfile(&ofilehandler);
-		return msg;
-	}
-	
+
+	// write buffer to the intermediate file
+	msg = file.appendtofile(buffer); /// &ofilehandler, 
+	buffer = "";
+	return msg;
 }

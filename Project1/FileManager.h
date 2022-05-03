@@ -10,6 +10,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include <fstream>
 
 
@@ -21,16 +22,21 @@ class FileManager
 		string directoryname;
 		string fileName;
 		char mode;
-		//ifstream ifilehandler;
-		//ofstream ofilehandler;
-
+		
 	public:
+		fstream currentFile;
+		vector<string> fileContent;
+
 		FileManager(string _directorytype, string _filename, char _mode);
-		string readline(ifstream* ifilehandler);
-		string closeinfile(ifstream*);
-		string closeoutfile(ofstream*);
-		string writetoFile(ofstream*,string);
-		string appendtofile(ofstream*,string);
+		void readFile();
+		string readFileContentLine(size_t l);
+
+		string closeinfile();
+		string closeoutfile();
+
+		string writetoFile(string);
+		string appendtofile(string);
+
 		//getters
 		string getDirectoryName();
 		string getFileName();
@@ -39,11 +45,10 @@ class FileManager
 		void setDirectoryName(string);
 		void setFileName(string);
 		void setMode(char);
-		ifstream openfileforreading();
-		ofstream openfileforwriting();
-		ofstream openfileforappending();
-
-
+		
+		void openfileforreading();
+		void openfileforwriting();
+		void openfileforappending();
 
 };
 
