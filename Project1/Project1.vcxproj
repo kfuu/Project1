@@ -144,7 +144,6 @@
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Reduce.cpp" />
-    <ClCompile Include="Sorting.cpp" />
     <ClCompile Include="WorkFlow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +151,6 @@
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Reduce.h" />
-    <ClInclude Include="Sorting.h" />
     <ClInclude Include="WorkFlow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
